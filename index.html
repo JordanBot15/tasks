@@ -8,9 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Inter', sans-serif; }
-    .card { backdrop-filter: blur(10px); }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .animate-fade { animation: fadeIn 0.3s ease-out; }
+    .animate-fade { animation: fadeIn 0.3s ease-out forwards; opacity: 0; }
   </style>
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white min-h-screen">
@@ -24,6 +23,26 @@
       </h1>
       <p class="text-slate-400 mt-2 text-sm">Track our projects in real-time</p>
     </header>
+
+    <!-- Stats Bar -->
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+      <div class="bg-white/5 backdrop-blur-md rounded-full px-4 py-2 border border-white/10">
+        <span class="text-slate-400 text-sm">🤖 Jordan:</span>
+        <span class="text-emerald-400 font-bold ml-1" id="jordan-tasks">0</span>
+      </div>
+      <div class="bg-white/5 backdrop-blur-md rounded-full px-4 py-2 border border-white/10">
+        <span class="text-slate-400 text-sm">👨‍💻 Dev:</span>
+        <span class="text-blue-400 font-bold ml-1" id="dev-tasks">0</span>
+      </div>
+      <div class="bg-white/5 backdrop-blur-md rounded-full px-4 py-2 border border-white/10">
+        <span class="text-slate-400 text-sm">✍️ Writer:</span>
+        <span class="text-purple-400 font-bold ml-1" id="writer-tasks">0</span>
+      </div>
+      <div class="bg-white/5 backdrop-blur-md rounded-full px-4 py-2 border border-white/10">
+        <span class="text-slate-400 text-sm">📋 PM:</span>
+        <span class="text-amber-400 font-bold ml-1" id="pm-tasks">0</span>
+      </div>
+    </div>
 
     <!-- Columns -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
@@ -62,27 +81,44 @@
     
     <!-- Footer -->
     <footer class="text-center mt-8 text-slate-500 text-xs">
-      Built with 🤖 <a href="https://jordanbot15.github.io/second-brain/" class="text-emerald-400 hover:underline">Second Brain</a>
+      👤 Himanshu (Boss) · 🤖 Jordan · 👨‍💻 Dev · ✍️ Writer · 📋 PM
+      <div class="mt-2">
+        <a href="https://jordanbot15.github.io/team/" class="text-emerald-400 hover:underline">👥 Team</a> ·
+        <a href="https://jordanbot15.github.io/second-brain/" class="text-emerald-400 hover:underline">🧠 Second Brain</a>
+      </div>
     </footer>
   </div>
 
   <script>
     const tasks = [
-      {id: 1, title: "Set up OpenClaw gateway", description: "Get OpenClaw running with Telegram", status: "done", assignee: "Jordan", created: "2026-02-19"},
-      {id: 2, title: "Build Second Brain app", description: "Create knowledge base app with journal, concepts, projects", status: "done", assignee: "Jordan", created: "2026-02-19"},
-      {id: 3, title: "Create JordanBot GitHub profile", description: "Profile README for JordanBot account", status: "done", assignee: "Jordan", created: "2026-02-19"},
-      {id: 4, title: "Fix Telegram cron delivery", description: "Health checks not delivering to Telegram reliably", status: "in-progress", assignee: "Jordan", created: "2026-02-20"},
-      {id: 5, title: "Build Task Board", description: "Create task tracker for projects", status: "done", assignee: "Jordan", created: "2026-02-21"},
-      {id: 6, title: "Gateway crash monitoring", description: "Find root cause of 10-min crash, add alerts", status: "todo", assignee: "both", created: "2026-02-19"},
-      {id: 7, title: "Write blog posts", description: "Document setup journey on github.io", status: "todo", assignee: "Himanshu", created: "2026-02-19"},
-      {id: 8, title: "EC2 Cost Calculator", description: "Website to estimate OpenClaw running costs", status: "todo", assignee: "both", created: "2026-02-19"},
-      {id: 9, title: "Minimalist Tasks App", description: "Build Excalidraw-style task app", status: "todo", assignee: "both", created: "2026-02-19"}
+      {id: 1, title: "Set up OpenClaw gateway", description: "Get OpenClaw running with Telegram", status: "done", assignee: "Jordan", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 2, title: "Build Second Brain app", description: "Create knowledge base app with journal, concepts, projects", status: "done", assignee: "Dev", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 3, title: "Create JordanBot GitHub profile", description: "Profile README for JordanBot account", status: "done", assignee: "Jordan", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 4, title: "Fix Telegram cron delivery", description: "Health checks not delivering to Telegram reliably", status: "done", assignee: "Jordan", suggestedBy: "Himanshu", created: "2026-02-20"},
+      {id: 5, title: "Build Task Board", description: "Create task tracker for projects", status: "done", assignee: "Dev", suggestedBy: "Himanshu", created: "2026-02-21"},
+      {id: 6, title: "Create Team Page", description: "Show team structure with Jordan, Dev, Writer, PM", status: "done", assignee: "Dev", suggestedBy: "Himanshu", created: "2026-02-21"},
+      {id: 7, title: "Gateway crash monitoring", description: "Find root cause of 10-min crash, add alerts", status: "todo", assignee: "Jordan", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 8, title: "Write blog posts", description: "Document setup journey on github.io", status: "todo", assignee: "Writer", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 9, title: "EC2 Cost Calculator", description: "Website to estimate OpenClaw running costs", status: "todo", assignee: "Dev", suggestedBy: "Himanshu", created: "2026-02-19"},
+      {id: 10, title: "Minimalist Tasks App", description: "Build Excalidraw-style task app", status: "todo", assignee: "Dev", suggestedBy: "Himanshu", created: "2026-02-19"}
     ];
     
+    const assigneeConfig = {
+      Jordan: { avatar: '🤖', color: 'emerald', bg: 'bg-emerald-500/20', border: 'border-emerald-500/30', text: 'text-emerald-300' },
+      Dev: { avatar: '👨‍💻', color: 'blue', bg: 'bg-blue-500/20', border: 'border-blue-500/30', text: 'text-blue-300' },
+      Writer: { avatar: '✍️', color: 'purple', bg: 'bg-purple-500/20', border: 'border-purple-500/30', text: 'text-purple-300' },
+      PM: { avatar: '📋', color: 'amber', bg: 'bg-amber-500/20', border: 'border-amber-500/30', text: 'text-amber-300' },
+      Himanshu: { avatar: '👤', color: 'pink', bg: 'bg-pink-500/20', border: 'border-pink-500/30', text: 'text-pink-300' }
+    };
+    
     function getAssigneeBadge(assignee) {
-      if (assignee === 'Jordan') return '<span class="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">🤖 Jordan</span>';
-      if (assignee === 'Himanshu') return '<span class="text-xs px-2 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">👤 Himanshu</span>';
-      return '<span class="text-xs px-2 py-1 rounded-full bg-slate-500/20 text-slate-300 border border-slate-500/30">🤖 + 👤</span>';
+      const config = assigneeConfig[assignee];
+      return `<span class="text-xs px-2 py-1 rounded-full ${config.bg} ${config.border} ${config.text} border">${config.avatar} ${assignee}</span>`;
+    }
+    
+    function getSuggestedBadge(suggestedBy) {
+      const config = assigneeConfig[suggestedBy];
+      return `<span class="text-xs px-2 py-1 rounded-full bg-slate-500/20 border border-slate-500/30 text-slate-400">💡 ${suggestedBy}</span>`;
     }
     
     function renderTasks(taskList, containerId) {
@@ -91,8 +127,9 @@
         <div class="bg-white/5 rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all duration-200 animate-fade" style="animation-delay: ${i * 50}ms">
           <div class="font-semibold text-white">${task.title}</div>
           <div class="text-sm text-slate-400 mt-1">${task.description}</div>
-          <div class="flex items-center gap-2 mt-3">
+          <div class="flex items-center gap-2 mt-3 flex-wrap">
             ${getAssigneeBadge(task.assignee)}
+            ${getSuggestedBadge(task.suggestedBy)}
             <span class="text-xs text-slate-500 ml-auto">${task.created}</span>
           </div>
         </div>
@@ -107,6 +144,14 @@
       document.getElementById('todo-count').textContent = todo.length;
       document.getElementById('inprogress-count').textContent = inprogress.length;
       document.getElementById('done-count').textContent = done.length;
+      
+      // Count by assignee
+      const counts = { Jordan: 0, Dev: 0, Writer: 0, PM: 0 };
+      done.forEach(t => { if (counts[t.assignee] !== undefined) counts[t.assignee]++; });
+      document.getElementById('jordan-tasks').textContent = counts.Jordan;
+      document.getElementById('dev-tasks').textContent = counts.Dev;
+      document.getElementById('writer-tasks').textContent = counts.Writer;
+      document.getElementById('pm-tasks').textContent = counts.PM;
       
       renderTasks(todo, 'todo');
       renderTasks(inprogress, 'inprogress');
