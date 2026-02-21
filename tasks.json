@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Set up OpenClaw gateway",
+    "description": "Get OpenClaw running with Telegram",
+    "status": "done",
+    "assignee": "Jordan",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 2,
+    "title": "Build Second Brain app",
+    "description": "Create knowledge base app with journal, concepts, projects",
+    "status": "done",
+    "assignee": "Jordan",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 3,
+    "title": "Create JordanBot GitHub profile",
+    "description": "Profile README for JordanBot account",
+    "status": "done",
+    "assignee": "Jordan",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 4,
+    "title": "Fix Telegram cron delivery",
+    "description": "Health checks not delivering to Telegram reliably",
+    "status": "in-progress",
+    "assignee": "Jordan",
+    "created": "2026-02-20"
+  },
+  {
+    "id": 5,
+    "title": "Build Task Board",
+    "description": "Create task tracker for projects",
+    "status": "in-progress",
+    "assignee": "Jordan",
+    "created": "2026-02-21"
+  },
+  {
+    "id": 6,
+    "title": "Gateway crash monitoring",
+    "description": "Find root cause of 10-min crash, add alerts",
+    "status": "todo",
+    "assignee": "both",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 7,
+    "title": "Write blog posts",
+    "description": "Document setup journey on github.io",
+    "status": "todo",
+    "assignee": "Himanshu",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 8,
+    "title": "EC2 Cost Calculator",
+    "description": "Website to estimate OpenClaw running costs",
+    "status": "todo",
+    "assignee": "both",
+    "created": "2026-02-19"
+  },
+  {
+    "id": 9,
+    "title": "Minimalist Tasks App",
+    "description": "Build Excalidraw-style task app",
+    "status": "todo",
+    "assignee": "both",
+    "created": "2026-02-19"
+  }
+]

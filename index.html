@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎯 Task Board</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen p-8">
+  <div class="max-w-6xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8">🎯 Task Board</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- To Do -->
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          To Do
+          <span class="text-zinc-500 text-sm" id="todo-count">(0)</span>
+        </h2>
+        <div id="todo" class="space-y-3"></div>
+      </div>
+      
+      <!-- In Progress -->
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+          In Progress
+          <span class="text-zinc-500 text-sm" id="inprogress-count">(0)</span>
+        </h2>
+        <div id="inprogress" class="space-y-3"></div>
+      </div>
+      
+      <!-- Done -->
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-800">
+        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          Done
+          <span class="text-zinc-500 text-sm" id="done-count">(0)</span>
+        </h2>
+        <div id="done" class="space-y-3"></div>
+      </div>
+      
+    </div>
+    
+    <div class="mt-8 text-center text-zinc-500 text-sm">
+      Built with Jordan 🤖 | <a href="https://jordanbot15.github.io/second-brain/" class="text-emerald-400 hover:underline">Second Brain</a>
+    </div>
+  </div>
+
+  <script>
+    const tasks = [
+      {id: 1, title: "Set up OpenClaw gateway", description: "Get OpenClaw running with Telegram", status: "done", assignee: "Jordan", created: "2026-02-19"},
+      {id: 2, title: "Build Second Brain app", description: "Create knowledge base app with journal, concepts, projects", status: "done", assignee: "Jordan", created: "2026-02-19"},
+      {id: 3, title: "Create JordanBot GitHub profile", description: "Profile README for JordanBot account", status: "done", assignee: "Jordan", created: "2026-02-19"},
+      {id: 4, title: "Fix Telegram cron delivery", description: "Health checks not delivering to Telegram reliably", status: "in-progress", assignee: "Jordan", created: "2026-02-20"},
+      {id: 5, title: "Build Task Board", description: "Create task tracker for projects", status: "in-progress", assignee: "Jordan", created: "2026-02-21"},
+      {id: 6, title: "Gateway crash monitoring", description: "Find root cause of 10-min crash, add alerts", status: "todo", assignee: "both", created: "2026-02-19"},
+      {id: 7, title: "Write blog posts", description: "Document setup journey on github.io", status: "todo", assignee: "Himanshu", created: "2026-02-19"},
+      {id: 8, title: "EC2 Cost Calculator", description: "Website to estimate OpenClaw running costs", status: "todo", assignee: "both", created: "2026-02-19"},
+      {id: 9, title: "Minimalist Tasks App", description: "Build Excalidraw-style task app", status: "todo", assignee: "both", created: "2026-02-19"}
+    ];
+    
+    function render() {
+      const todo = tasks.filter(t => t.status === 'todo');
+      const inprogress = tasks.filter(t => t.status === 'in-progress');
+      const done = tasks.filter(t => t.status === 'done');
+      
+      document.getElementById('todo-count').textContent = `(${todo.length})`;
+      document.getElementById('inprogress-count').textContent = `(${inprogress.length})`;
+      document.getElementById('done-count').textContent = `(${done.length})`;
+      
+      function renderTasks(taskList, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = taskList.map(task => `
+          <div class="bg-zinc-800 rounded-lg p-3 hover:bg-zinc-700 transition">
+            <div class="font-medium">${task.title}</div>
+            <div class="text-sm text-zinc-400 mt-1">${task.description}</div>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="text-xs px-2 py-0.5 rounded ${
+                task.assignee === 'Jordan' ? 'bg-blue-900 text-blue-300' :
+                task.assignee === 'Himanshu' ? 'bg-purple-900 text-purple-300' :
+                'bg-zinc-700 text-zinc-300'
+              }">${task.assignee === 'both' ? '🤖 + 👤' : task.assignee === 'Jordan' ? '🤖 Jordan' : '👤 ' + task.assignee}</span>
+              <span class="text-xs text-zinc-500">${task.created}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+      
+      renderTasks(todo, 'todo');
+      renderTasks(inprogress, 'inprogress');
+      renderTasks(done, 'done');
+    }
+    
+    render();
+  </script>
+</body>
+</html>
